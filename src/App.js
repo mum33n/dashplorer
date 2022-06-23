@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import Homepage from "./pages/Homepage";
+import Dashboard from "./pages/Dashboard";
+import AccountDashboard from "./pages/AccountDashboard";
+import Events from "./pages/Events";
+import { useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import { chainMap, getBalances, getPortfolio, getPrice } from "./utils/utils";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="bg-bgColor app">
+      <Routes>
+        <Route path="/" element={<Homepage />}></Route>
+        <Route path="dashboard" element={<Dashboard />}></Route>
+        <Route
+          path="accounts/:chain/:account"
+          element={<AccountDashboard />}
+        ></Route>
+        <Route path="/:chain/events" element={<Events />} />
+      </Routes>
     </div>
   );
 }
