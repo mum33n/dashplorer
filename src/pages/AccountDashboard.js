@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { AiOutlineUser } from "react-icons/ai";
 import { useParams } from "react-router-dom";
+import logo from "../assets/logo.png";
 import { getBalances, getTotalBalance } from "../utils/utils";
 function paginate(items, max, page) {
   let numberOfPage = Math.ceil(items.length / max);
@@ -15,7 +16,7 @@ function pageBtns(pages, state, current) {
   for (let i = 0; i < pages; i++) {
     btns.push(
       <button
-        className={` px-8 py-3 rounded text-slate-900 ${
+        className={`px-8 py-3 rounded text-slate-900 ${
           current === i + 1 ? "bg-slate-200" : "bg-btnColor"
         }`}
         onClick={() => state(i + 1)}
@@ -61,42 +62,58 @@ function AccountDashboard() {
               Portfollio
             </a>
           </div>
-          <div className="mt-10">
-            <div className="flex mb-5 justify-between">
-              <div className="flex">
-                <div>
-                  <h1>Asset</h1>
-                </div>
-              </div>
-              <div>value</div>
-            </div>
-            {data &&
-              pagedData.page.map((item) => {
-                if (item.contract_name) {
-                  if (item?.balance !== "0") {
-                    return (
-                      <a
-                        href={`/token/${item.contract_address}`}
-                        className="flex mb-5 bg-btn-color py-5 justify-between"
-                      >
-                        <div className="flex">
-                          <div>
-                            <h1>{`${item.contract_ticker_symbol} (${(
-                              parseFloat(item.balance) /
-                              10 ** item.contract_decimals
-                            ).toFixed(2)})`}</h1>
-                            <p>{item.quote_rate}</p>
-                          </div>
-                        </div>
-                        <div>{parseFloat(item.quote).toFixed(4)}</div>
-                      </a>
-                    );
-                  }
-                }
-              })}
+          <div className="mt-10 overflow-scroll">
+            <table className=" mb-5 min-w-[600px] border-b w-full text-white">
+              <thead className="bg-btnColor">
+                <tr>
+                  <th className="text-left p-5">Asset</th>
+                  <th className="">Value</th>
+                </tr>
+              </thead>
+              <tbody className="p-5">
+                {data &&
+                  pagedData.page.map((item) => {
+                    if (item.contract_name) {
+                      if (item?.balance !== "0") {
+                        return (
+                          <tr className="border-slate-400 border-b">
+                            <td className="p-5">
+                              <div className="flex gap-2">
+                                {item.logo_url && (
+                                  <img
+                                    onError={({ currentTarget }) => {
+                                      currentTarget.onerror = null;
+                                      currentTarget.src = logo;
+                                    }}
+                                    src={item.logo_url}
+                                    width={"50px"}
+                                    style={{ borderRadius: "50%" }}
+                                  ></img>
+                                )}
+                                <div>
+                                  <h1>{`${item.contract_ticker_symbol} (${(
+                                    parseFloat(item.balance) /
+                                    10 ** item.contract_decimals
+                                  ).toFixed(2)})`}</h1>
+                                  <p>{item.quote_rate}</p>
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <div className="text-center">
+                                {parseFloat(item.quote).toFixed(4)}
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      }
+                    }
+                  })}
+              </tbody>
+            </table>
           </div>
           <div className="flex gap-3 justify-center flex-wrap">
-            {pageBtns(pagedData.pages, setPage, page)}
+            {pagedData.pages !== 1 && pageBtns(pagedData.pages, setPage, page)}
           </div>
         </div>
       </div>

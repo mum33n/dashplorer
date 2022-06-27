@@ -122,7 +122,18 @@ export function getAggregate(accounts) {
   console.log(aggregate);
   return aggregate;
 }
-export async function getEventByHash(chain, hash, start, end) {
+//
+export async function getEventByTopic(chain, hash, start, end, sender) {
+  let data = await axios
+    .get(
+      `https://api.covalenthq.com/v1/${chain}/events/topics/${hash}/?starting-block=${start}&ending-block=${end}&sender-address=${sender}&key=${apiKey}`
+    )
+    .then((res) => res.data)
+    .then((data) => data.data);
+  return data;
+}
+
+export async function getEventByContract(chain, hash, start, end) {
   let data = await axios
     .get(
       `https://api.covalenthq.com/v1/${chain}/events/address/${hash}/?starting-block=${start}&ending-block=${end}&key=${apiKey}`

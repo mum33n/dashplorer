@@ -28,7 +28,7 @@ function InputContract({ toggle }) {
       if (accounts) {
         negateState(toggle);
         History(
-          `/${formValue.blockchain}/events?address=${formValue.CA}&start=${formValue.start}&end=${formValue.end}`
+          `/${formValue.blockchain}/events?contract=${formValue.CA}&start=${formValue.start}&end=${formValue.end}`
         );
         // console.log(localStorage.getItem('accounts'))
       }

@@ -28,7 +28,7 @@ function InputHash({ toggle }) {
       if (accounts) {
         negateState(toggle);
         History(
-          `/${formValue.blockchain}/events?hash=${formValue.CA}&start=${formValue.start}&end=${formValue.end}`
+          `/${formValue.blockchain}/events?hash=${formValue.CA}&sender=${formValue.sender}&start=${formValue.start}&end=${formValue.end}`
         );
         // console.log(localStorage.getItem('accounts'))
       }
@@ -44,7 +44,7 @@ function InputHash({ toggle }) {
           className="text-white text-2xl ml-auto"
         />
         <div className="flex mt-10 flex-col items-center justify-center">
-          <h1 className="mb-5 text-white">Events by Contract Address</h1>
+          <h1 className="mb-5 text-white">Events by Contract Hash/Topic</h1>
           <label className="mr-auto">
             Blockchain
             <select
@@ -63,12 +63,22 @@ function InputHash({ toggle }) {
           </label>
 
           <label className="mr-auto mt-5">
-            Contract Address
+            Contract Hash/Topic
             <input
               onChange={(e) => ChangeEvent(e)}
               value={formValue.CA}
               name="CA"
               placeholder="--Enter Contract Address--"
+              className="w-full h-[40px]"
+            ></input>
+          </label>
+          <label className="mr-auto mt-5">
+            Sender
+            <input
+              onChange={(e) => ChangeEvent(e)}
+              value={formValue.sender}
+              name="sender"
+              placeholder="--Enter Reciever's Address--"
               className="w-full h-[40px]"
             ></input>
           </label>
