@@ -7,6 +7,7 @@ import Events from "./pages/Events";
 import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { chainMap, getBalances, getPortfolio, getPrice } from "./utils/utils";
+import TokenPage from "./pages/TokenPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           element={<AccountDashboard />}
         ></Route>
         <Route path="/:chain/events" element={<Events />} />
+        {/* <Route path="tokens/:chain/:address" element={<TokenPage />} /> */}
       </Routes>
     </div>
   );

@@ -1,29 +1,68 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDatalayer } from "../hooks/datalayer";
-import { AiFillPlusCircle } from "react-icons/ai";
+import { AiFillPlusCircle, AiOutlineClose } from "react-icons/ai";
 import {
   chainMap,
-  getAggregate,
+  getBalances,
   negateState,
   shortenAddress,
 } from "../utils/utils";
 import InputAdress from "./InputAdress";
+// import DashboardTable from "./DashboardTable";
 
 function DashboardBox() {
   const [inputAddress, setInput] = useState();
-  const [{ accounts, dashboard }, dispatch] = useDatalayer();
+  const [{ accounts }, dispatch] = useDatalayer();
   let total = 0;
-  const [DashBoard, setDashBoard] = useState([]);
-  useEffect(() => {
-    async function getDash() {
-      const dashboard = await getAggregate(accounts);
-      dispatch({ type: "setDashboard", dashboard: dashboard });
-      console.log(dashboard);
-    }
-    getDash();
-  }, [accounts]);
+  console.log(accounts[0]);
+  const [dashboard, setDashBoard] = useState([]);
 
-  console.log(dashboard);
+  const removeAccount = useCallback(
+    (index) => {
+      accounts.splice(index, 1);
+      localStorage.setItem("accounts", JSON.stringify([...accounts]));
+      dispatch({
+        type: "setAccounts",
+        accounts: accounts,
+      });
+      window.location.reload();
+    },
+    [accounts, dispatch]
+  );
+
+  const getDash = useCallback(
+    (accounts) => {
+      let aggregate = [];
+      accounts.map((item) => {
+        let chain = item?.blockchain;
+        let address = item?.wallet;
+        let AggObj = { chain: chain, address: address };
+        let total = 1;
+        AggObj.total = total;
+        aggregate.push(AggObj);
+      });
+
+      setDashBoard(aggregate);
+    },
+    [accounts]
+  );
+  const getTotal = useCallback(async (chain, address) => {
+    let data = await getBalances(chain, address);
+    return data;
+  }, []);
+
+  useEffect(() => {
+    getDash(accounts);
+  }, [getDash, accounts]);
+  // useEffect(() => {
+  //   let items = [];
+  //   accounts.map((item) => {
+  //     getTotal(item.blockchain, item.wallet).then((item) => {
+  //       items.push(item);
+  //     });
+  //     console.log(Array(items)[0][0]);
+  //   });
+  // }, [accounts]);
 
   return (
     <div className="mt-5">
@@ -31,14 +70,13 @@ function DashboardBox() {
         <div className="flex mb-5">
           <div className="md:w-[60%] w-[40%]">Name</div>
           <div className="md:w-[20%] w-[30%]">Blockchain</div>
-          <div className="md:w-[20%] w-[30%] ">{"Bal. (USD)"}</div>
+          <div className="md:w-[20%] w-[30%] "></div>
         </div>
         <div>
-          {dashboard.map((item) => {
-            console.log(item.price);
+          {dashboard.map((item, ind) => {
             total += item.price;
             return (
-              <div className="flex">
+              <div className="flex mt-5">
                 <a
                   href={`/accounts/${item.chain}/${item.address}`}
                   className="md:w-[60%] w-[40%]"
@@ -46,10 +84,13 @@ function DashboardBox() {
                   <div>{shortenAddress(item.address)}</div>
                 </a>
                 <div className="md:w-[20%] w-[30%] ">
-                  {chainMap.get(item.chain).label.slice(0, 7)}...
+                  {chainMap.get(item?.chain)?.label?.slice(0, 9)}...
                 </div>
                 <div className="md:w-[20%] w-[30%] ">
-                  {/* {item.total?.toFixed(3)} */}
+                  <AiOutlineClose
+                    onClick={() => removeAccount(ind)}
+                    className="text-red-500 font-bold text-xl cursor-pointer"
+                  ></AiOutlineClose>
                 </div>
               </div>
             );
@@ -57,7 +98,7 @@ function DashboardBox() {
         </div>
         <AiFillPlusCircle onClick={() => negateState(setInput)} />
       </div>
-      <div className="bg-popOver mt-10 text-white w-[90%] rounded-lg mx-auto p-10 shadow-lg">
+      {/* <div className="bg-popOver mt-10 text-white w-[90%] rounded-lg mx-auto p-10 shadow-lg">
         <div className="flex mb-5">
           <div className="md:w-[60%] w-[40%]">Total Balance</div>
         </div>
@@ -72,7 +113,7 @@ function DashboardBox() {
         <div className="flex">
           <div>$500</div>
         </div>
-      </div>
+      </div> */}
       {inputAddress && <InputAdress toggle={setInput} />}
     </div>
   );

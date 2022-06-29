@@ -3,7 +3,7 @@ import { chains } from "./availableChains";
 const apiKey = "ckey_81ff9589897446c5be350364dc7";
 
 export function shortenAddress(address) {
-  return `${address.slice(0, 3)}...${address.slice(-3)}`;
+  return `${address?.slice(0, 6)}...${address?.slice(-3)}`;
 }
 export function getTotalBalance(data) {
   let total = 0;
@@ -82,39 +82,19 @@ export async function getAccountInfo(chain, address) {
   };
   return finalObject;
 }
-// export async function getAggregate(accounts) {
-//   let aggregate = [];
-//   accounts.map(async (item) => {
-//     let chain = item.blockchain;
-//     let address = item.wallet;
-//     let AggObj = { chain: chain, address: address };
-//     let prices = [];
-
-//     async function setDetails() {
-//       let data = await getAccountInfo(chain, address);
-//       return data.total;
-//     }
-//     let price = await setDetails();
-//     console.log(price);
-//     AggObj.total = price;
-//     aggregate.push(AggObj);
-//   });
-//   console.log(aggregate);
-//   return aggregate;
-// }
-export function getAggregate(accounts) {
+export async function getAggregate(accounts) {
   let aggregate = [];
   accounts.map(async (item) => {
     let chain = item.blockchain;
     let address = item.wallet;
     let AggObj = { chain: chain, address: address };
-    let price;
+    let prices = [];
 
-    async function setDetails(update) {
+    async function setDetails() {
       let data = await getAccountInfo(chain, address);
-      update += data;
+      return data.total;
     }
-    setDetails(price);
+    let price = await setDetails();
     console.log(price);
     AggObj.total = price;
     aggregate.push(AggObj);
@@ -122,6 +102,26 @@ export function getAggregate(accounts) {
   console.log(aggregate);
   return aggregate;
 }
+// export function getAggregate(accounts) {
+//   let aggregate = [];
+//   accounts.map(async (item) => {
+//     let chain = item.blockchain;
+//     let address = item.wallet;
+//     let AggObj = { chain: chain, address: address };
+//     let price;
+
+//     async function setDetails(update) {
+//       let data = await getAccountInfo(chain, address);
+//       update += data;
+//     }
+//     setDetails(price);
+//     console.log(price);
+//     AggObj.total = price;
+//     aggregate.push(AggObj);
+//   });
+//   console.log(aggregate);
+//   return aggregate;
+// }
 //
 export async function getEventByTopic(chain, hash, start, end, sender) {
   let data = await axios
@@ -164,4 +164,25 @@ export function pageBtns(pages, state, current) {
     );
   }
   return btns;
+}
+
+export async function getPriceHistory(chain, address, start) {
+  let data = await axios
+    .get(
+      `https://api.covalenthq.com/v1/pricing/historical_by_addresses_v2/${chain}/USD/${address}/?quote-currency=USD&format=JSON&from=${start}&key=${apiKey}`
+    )
+    .then((res) => res.data)
+    .then((data) => data.data);
+  console.log(data);
+  return data;
+}
+
+export async function getTransactions(chain, address) {
+  let data = await axios
+    .get(
+      `https://api.covalenthq.com/v1/${chain}/address/${address}/transactions_v2/?quote-currency=USD&format=JSON&block-signed-at-asc=false&no-logs=false&key=${apiKey}`
+    )
+    .then((res) => res.data)
+    .then((data) => data.data);
+  return data;
 }

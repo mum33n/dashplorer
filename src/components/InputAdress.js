@@ -51,14 +51,14 @@ function InputAdress({ toggle }) {
   }
   return (
     <div className="fixed top-0 left-0 bg-transparent  flex flex-col justify-center w-full h-[100vh]">
-      <div className="container pt-5  pb-20 md:w-[40%] w-[90%] cursor-pointer mx-auto bg-bgColor px-10">
+      <div className="container pt-5 text-white  pb-20 md:w-[40%] w-[90%] cursor-pointer mx-auto bg-bgColor px-10">
         <AiOutlineCloseCircle
           onClick={() => negateState(toggle)}
           className="text-white text-2xl ml-auto"
         />
         <div className="flex mt-10 flex-col items-center justify-center">
           <h1 className="mb-5">New Wallet</h1>
-          <label className="mr-auto" for="blockchain">
+          <label className="mr-auto " for="blockchain">
             Blockchain
           </label>
           <select
@@ -66,7 +66,7 @@ function InputAdress({ toggle }) {
             id="blockchain"
             value={formValue.blockchain}
             name="blockchain"
-            className="w-full h-[40px]"
+            className="w-full text-black h-[40px]"
           >
             {chains.map((chain) => (
               <option value={chain.chain_id}>{chain.label}</option>
@@ -82,7 +82,7 @@ function InputAdress({ toggle }) {
             value={formValue.wallet}
             name="wallet"
             placeholder="--Enter Wallet Address--"
-            className="w-full h-[40px]"
+            className="w-full text-black h-[40px]"
           ></input>
           <button
             onClick={() => submit()}

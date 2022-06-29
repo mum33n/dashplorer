@@ -85,6 +85,7 @@ function Events() {
             <tr>
               <th className="border border-slate-300 py-5">Transaction Hash</th>
               <th className="border border-slate-300">Time</th>
+              <th className="border border-slate-300">Block Height</th>
               <th className="border border-slate-300 ">Sender's Address</th>
               <th className="border border-slate-300 ">Method</th>
             </tr>
@@ -98,6 +99,9 @@ function Events() {
                   </td>
                   <td className="border border-slate-300 text-center">
                     {item.block_signed_at}
+                  </td>
+                  <td className="border border-slate-300 tex-center">
+                    {item.block_height}
                   </td>
                   <td className="border border-slate-300 tex-center">
                     {item.sender_address}

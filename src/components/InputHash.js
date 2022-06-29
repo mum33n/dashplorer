@@ -38,21 +38,21 @@ function InputHash({ toggle }) {
   }
   return (
     <div className="fixed top-0 left-0 bg-transparent  flex flex-col justify-center w-full h-[100vh]">
-      <div className="container pt-5  pb-20 md:w-[40%] w-[90%] cursor-pointer mx-auto bg-bgColor px-5 md:px-10">
+      <div className="container text-white pt-5  pb-20 md:w-[40%] w-[90%] cursor-pointer mx-auto bg-bgColor px-5 md:px-10">
         <AiOutlineCloseCircle
           onClick={() => negateState(toggle)}
           className="text-white text-2xl ml-auto"
         />
         <div className="flex mt-10 flex-col items-center justify-center">
           <h1 className="mb-5 text-white">Events by Contract Hash/Topic</h1>
-          <label className="mr-auto">
+          <label className="w-full mr-auto">
             Blockchain
             <select
               onChange={(e) => ChangeEvent(e)}
               id="blockchain"
               value={formValue.blockchain}
               name="blockchain"
-              className="w-full h-[40px]"
+              className="w-full text-black h-[40px]"
             >
               {chains.map((chain) => (
                 <option key={chain.label} value={chain.chain_id}>
@@ -62,44 +62,44 @@ function InputHash({ toggle }) {
             </select>
           </label>
 
-          <label className="mr-auto mt-5">
+          <label className="w-full mr-auto mt-5">
             Contract Hash/Topic
             <input
               onChange={(e) => ChangeEvent(e)}
               value={formValue.CA}
               name="CA"
               placeholder="--Enter Contract Address--"
-              className="w-full h-[40px]"
+              className="w-full text-white h-[40px]"
             ></input>
           </label>
-          <label className="mr-auto mt-5">
+          <label className="mr-auto mt-5 w-full">
             Sender
             <input
               onChange={(e) => ChangeEvent(e)}
               value={formValue.sender}
               name="sender"
               placeholder="--Enter Reciever's Address--"
-              className="w-full h-[40px]"
+              className="w-full h-[40px] text-white"
             ></input>
           </label>
-          <label className="mr-auto mt-5">
+          <label className="mr-auto mt-5 w-full">
             Starting
             <input
               onChange={(e) => ChangeEvent(e)}
               value={formValue.start}
               name="start"
               placeholder="--Enter Starting Block--"
-              className="w-full h-[40px]"
+              className="w-full h-[40px] text-white"
             ></input>
           </label>
-          <label className="mr-auto mt-5">
+          <label className="mr-auto mt-5 w-full">
             End
             <input
               onChange={(e) => ChangeEvent(e)}
               value={formValue.end}
               name="end"
               placeholder="--Enter Ending Block--"
-              className="w-full h-[40px]"
+              className="w-full h-[40px] text-white"
             ></input>
           </label>
           <button

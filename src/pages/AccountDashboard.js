@@ -51,16 +51,14 @@ function AccountDashboard() {
         <div className="bg-slate-400 ml-5 mt-[-65px] inline-block p-10 rounded-full">
           <AiOutlineUser className="text-6xl" />
         </div>
-        <div className="px-10 text-white">{account}</div>
+        <div className="px-10 text-white truncate">{account}</div>
         <div className="bg-popOver w-[95%] mt-10 p-10 text-white mx-auto">
           <h1>Net Worth</h1>
           <div>$ {total}</div>
         </div>
         <div className="bg-popOver w-[95%] mt-10 p-10 text-white mx-auto">
           <div className="flex justify-between">
-            <a href="/" className="text-center w-full">
-              Portfollio
-            </a>
+            <div className="text-center w-full">Portfollio</div>
           </div>
           <div className="mt-10 overflow-scroll">
             <table className=" mb-5 min-w-[600px] border-b w-full text-white">
