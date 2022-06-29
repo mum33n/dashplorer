@@ -14,7 +14,6 @@ function InputAdress({ toggle }) {
     setform((prev) => {
       return { ...prev, [name]: value };
     });
-    console.log(formValue);
   }
   function submit() {
     let balances = getBalances(formValue.blockchain, formValue.wallet);

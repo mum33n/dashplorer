@@ -42,7 +42,6 @@ function AccountDashboard() {
     getData();
   }, [account, chain]);
   let pagedData = paginate(data, 10, page);
-  console.log(pagedData);
   return (
     <div>
       <Navbar />

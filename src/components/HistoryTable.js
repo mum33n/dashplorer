@@ -8,7 +8,6 @@ function HistoryTable({ chain, address }) {
       setHistory(res);
     });
   }, [chain, address]);
-  console.log(history);
   return (
     <div>
       <div className="mt-10 overflow-scroll">

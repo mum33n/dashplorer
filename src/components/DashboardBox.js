@@ -14,7 +14,6 @@ function DashboardBox() {
   const [inputAddress, setInput] = useState();
   const [{ accounts }, dispatch] = useDatalayer();
   let total = 0;
-  console.log(accounts[0]);
   const [dashboard, setDashBoard] = useState([]);
 
   const removeAccount = useCallback(

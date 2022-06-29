@@ -11,10 +11,8 @@ function TokenPage() {
   let date1 = date.setDate(date.getDate() - 29);
   let str = date.toISOString().split("T")[0];
   const { chain, address } = useParams();
-  console.log(address);
 
   const getHistory = () => {};
-  console.log(first);
   useEffect(() => {
     getPriceHistory(chain, address, str).then((data) => {
       setfirst(data);

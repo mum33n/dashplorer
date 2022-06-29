@@ -11,7 +11,6 @@ function Homepage() {
   const [inputHash, setHash] = useState();
   const [inputContract, setContract] = useState();
   const [{ accounts }, dispatch] = useDatalayer();
-  console.log(accounts);
   return (
     <div className="pb-10">
       <Navbar />

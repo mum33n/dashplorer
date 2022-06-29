@@ -95,11 +95,9 @@ export async function getAggregate(accounts) {
       return data.total;
     }
     let price = await setDetails();
-    console.log(price);
     AggObj.total = price;
     aggregate.push(AggObj);
   });
-  console.log(aggregate);
   return aggregate;
 }
 // export function getAggregate(accounts) {
@@ -173,7 +171,6 @@ export async function getPriceHistory(chain, address, start) {
     )
     .then((res) => res.data)
     .then((data) => data.data);
-  console.log(data);
   return data;
 }
 
