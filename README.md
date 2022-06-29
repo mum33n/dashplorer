@@ -23,4 +23,4 @@ run:
 - `GET /v1/chain_id/events/address/address/`
 - `GET /v1/chains/`
 
-## Deployed on [https://dashplorer.vercel.app/][https://dashplorer.vercel.app/]
+## Deployed on [https://dashplorer.vercel.app/](https://dashplorer.vercel.app/)
