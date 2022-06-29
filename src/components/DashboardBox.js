@@ -1,20 +1,13 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDatalayer } from "../hooks/datalayer";
 import { AiFillPlusCircle, AiOutlineClose } from "react-icons/ai";
-import {
-  chainMap,
-  getBalances,
-  negateState,
-  shortenAddress,
-} from "../utils/utils";
+import { chainMap, negateState, shortenAddress } from "../utils/utils";
 import InputAdress from "./InputAdress";
 // import DashboardTable from "./DashboardTable";
 
 function DashboardBox() {
   const [inputAddress, setInput] = useState();
   const [{ accounts }, dispatch] = useDatalayer();
-  let total = 0;
-  console.log(accounts[0]);
   const [dashboard, setDashBoard] = useState([]);
 
   const removeAccount = useCallback(
@@ -30,25 +23,18 @@ function DashboardBox() {
     [accounts, dispatch]
   );
 
-  const getDash = useCallback(
-    (accounts) => {
-      let aggregate = [];
-      accounts.map((item) => {
-        let chain = item?.blockchain;
-        let address = item?.wallet;
-        let AggObj = { chain: chain, address: address };
-        let total = 1;
-        AggObj.total = total;
-        aggregate.push(AggObj);
-      });
+  const getDash = useCallback((accounts) => {
+    let aggregate = [];
+    accounts.map((item) => {
+      let chain = item?.blockchain;
+      let address = item?.wallet;
+      let AggObj = { chain: chain, address: address };
+      let total = 1;
+      AggObj.total = total;
+      aggregate.push(AggObj);
+    });
 
-      setDashBoard(aggregate);
-    },
-    [accounts]
-  );
-  const getTotal = useCallback(async (chain, address) => {
-    let data = await getBalances(chain, address);
-    return data;
+    setDashBoard(aggregate);
   }, []);
 
   useEffect(() => {
@@ -74,7 +60,6 @@ function DashboardBox() {
         </div>
         <div>
           {dashboard.map((item, ind) => {
-            total += item.price;
             return (
               <div className="flex mt-5">
                 <a
@@ -84,7 +69,7 @@ function DashboardBox() {
                   <div>{shortenAddress(item.address)}</div>
                 </a>
                 <div className="md:w-[20%] w-[30%] ">
-                  {chainMap.get(item?.chain)?.label?.slice(0, 7)}...
+                  {chainMap.get(item?.chain)?.label?.slice(0, 9)}...
                 </div>
                 <div className="md:w-[20%] w-[30%] ">
                   <AiOutlineClose
