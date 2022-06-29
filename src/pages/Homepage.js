@@ -10,19 +10,18 @@ function Homepage() {
   const [inputAddress, setInput] = useState();
   const [inputHash, setHash] = useState();
   const [inputContract, setContract] = useState();
-  const [{ accounts }, dispatch] = useDatalayer();
+  const [{ accounts }] = useDatalayer();
   return (
     <div className="pb-10">
       <Navbar />
       <div className="pt-20 px-5 md:w-[50%]">
         <div className="pt-20">
           <h1 className="text-5xl text-white font-bold">
-            Your home to <span className="text-btnColor">Web3</span>
+            Monitor wallets and Explore blockchain
           </h1>
           <p className=" text-xl mt-5 text-white">
-            Manage your entire web3 portfollio from DeFi to NFTs and whatever
-            comes next. Invest in the latest oppportunities from one convenient
-            place.
+            Manage your entire web3 portfollio from different wallets and
+            blockchains and explore events on different chains.
           </p>
           <div className="pt-5 flex gap-3 flex-wrap">
             <a href="#explore" className="bg-btnColor px-8 py-3 rounded">
@@ -48,7 +47,7 @@ function Homepage() {
           Explore
         </h1>
         <div className="text-white text-xl text-center">
-          Explore transactions from the blockchain of your choice by hashes or
+          Explore Events from the blockchain of your choice by hashes or
           contract address over a block range{" "}
         </div>
         <div className="flex flex-wrap justify-center gap-5 mt-5 mb-20">

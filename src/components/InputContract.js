@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import { containsObject, getBalances, negateState } from "../utils/utils.js";
+import { negateState } from "../utils/utils.js";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { chains } from "../utils/availableChains.js";
 import { useNavigate } from "react-router-dom";
-import { useDatalayer } from "../hooks/datalayer.js";
 
 function InputContract({ toggle }) {
-  const [{ accounts }, dispatch] = useDatalayer();
   const [formValue, setform] = useState({ blockchain: "1", wallet: "" });
   const History = useNavigate();
   function ChangeEvent(e) {
@@ -16,7 +14,6 @@ function InputContract({ toggle }) {
     });
   }
   function submit() {
-    let balances = getBalances(formValue.blockchain, formValue.wallet);
     if (
       formValue.blockchain &&
       formValue.CA &&
@@ -24,7 +21,6 @@ function InputContract({ toggle }) {
       formValue.end
     ) {
       let accounts = JSON.parse(localStorage.getItem("accounts")) || [];
-      let found = containsObject(formValue, accounts, "blockchain", "wallet");
       if (accounts) {
         negateState(toggle);
         History(

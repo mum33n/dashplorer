@@ -1,6 +1,6 @@
-import React, { useCallback, useState, useEffect } from "react";
-import { Line } from "react-chartjs-2";
-import { Chart as ChartJS } from "chart.js/auto";
+import React, { useState, useEffect } from "react";
+// import { Line } from "react-chartjs-2";
+// import { Chart as ChartJS } from "chart.js/auto";
 import { useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import { getPriceHistory } from "../utils/utils";
@@ -24,7 +24,7 @@ function TokenPage() {
       <Navbar />
       {first?.prices && (
         <div className="w-1/2 mx-auto">
-          <Line
+          {/* <Line
             data={{
               labels: first?.prices?.map((data) => data.date),
               datasets: [
@@ -35,7 +35,7 @@ function TokenPage() {
                 },
               ],
             }}
-          />
+          /> */}
         </div>
       )}
       {date.toLocaleString().split(",")[0].split("/").join("-")}

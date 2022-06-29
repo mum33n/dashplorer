@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { chains } from "../utils/availableChains";
 import Navbar from "../components/Navbar";
 import EventHashForm from "../components/eventHashForm";
 import {
@@ -15,7 +14,6 @@ import EventContractForm from "../components/eventContractForm";
 function Events() {
   let searchParams = new URLSearchParams(window.location.search);
   const [isloading, setLoading] = useState();
-  const [isNotFound, setFound] = useState();
   const [page, setPage] = useState(1);
 
   let endBlock = searchParams.get("end");
@@ -72,7 +70,7 @@ function Events() {
       // }
     }
     getDetails();
-  }, []);
+  }, [hashQuery, hash, chain, contractAddress, endBlock, sender, startBlock]);
   let pag = paginate(data, 10, page);
   return (
     <div>
@@ -114,7 +112,7 @@ function Events() {
             })}
           </tbody>
         </table>
-        {data.length == 0 && !isloading && (
+        {data.length === 0 && !isloading && (
           <div className="text-center text-white py-5 text-3xl">
             No event found{" "}
           </div>

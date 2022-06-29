@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useDatalayer } from "../hooks/datalayer.js";
 
 function InputAdress({ toggle }) {
-  const [{ accounts }, dispatch] = useDatalayer();
+  const [dispatch] = useDatalayer();
   const [formValue, setform] = useState({ blockchain: "1", wallet: "" });
   const History = useNavigate();
   function ChangeEvent(e) {

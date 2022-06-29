@@ -71,40 +71,41 @@ function AccountDashboard() {
                 {data &&
                   pagedData.page.map((item) => {
                     if (item.contract_name) {
-                      if (item?.balance !== "0") {
-                        return (
-                          <tr className="border-slate-400 border-b">
-                            <td className="p-5">
-                              <div className="flex gap-2">
-                                {item.logo_url && (
-                                  <img
-                                    onError={({ currentTarget }) => {
-                                      currentTarget.onerror = null;
-                                      currentTarget.src = logo;
-                                    }}
-                                    src={item.logo_url}
-                                    width={"50px"}
-                                    style={{ borderRadius: "50%" }}
-                                  ></img>
-                                )}
-                                <div>
-                                  <h1>{`${item.contract_ticker_symbol} (${(
-                                    parseFloat(item.balance) /
-                                    10 ** item.contract_decimals
-                                  ).toFixed(2)})`}</h1>
-                                  <p>{item.quote_rate}</p>
-                                </div>
+                      // if (item?.balance !== "0") {
+                      return (
+                        <tr className="border-slate-400 border-b">
+                          <td className="p-5">
+                            <div className="flex gap-2">
+                              {item.logo_url && (
+                                <img
+                                  onError={({ currentTarget }) => {
+                                    currentTarget.onerror = null;
+                                    currentTarget.src = logo;
+                                  }}
+                                  alt=""
+                                  src={item.logo_url}
+                                  width={"50px"}
+                                  style={{ borderRadius: "50%" }}
+                                ></img>
+                              )}
+                              <div>
+                                <h1>{`${item.contract_ticker_symbol} (${(
+                                  parseFloat(item.balance) /
+                                  10 ** item.contract_decimals
+                                ).toFixed(2)})`}</h1>
+                                <p>{item.quote_rate}</p>
                               </div>
-                            </td>
-                            <td>
-                              <div className="text-center">
-                                {parseFloat(item.quote).toFixed(4)}
-                              </div>
-                            </td>
-                          </tr>
-                        );
-                      }
+                            </div>
+                          </td>
+                          <td>
+                            <div className="text-center">
+                              {parseFloat(item.quote).toFixed(4)}
+                            </div>
+                          </td>
+                        </tr>
+                      );
                     }
+                    // }
                   })}
               </tbody>
             </table>

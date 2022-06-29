@@ -88,7 +88,6 @@ export async function getAggregate(accounts) {
     let chain = item.blockchain;
     let address = item.wallet;
     let AggObj = { chain: chain, address: address };
-    let prices = [];
 
     async function setDetails() {
       let data = await getAccountInfo(chain, address);
