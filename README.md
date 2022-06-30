@@ -1,4 +1,4 @@
-# DASPLORER
+# DASHPLORER
 DASHPLORER was coined from `DASHBOARD` and `EXPLORER` which means an app that has Properties of Dashboard/Portforlio Tracker and Blockchain Explorer made possible by COVALENT API. It can be used for all Mainnet Blockchains Supported by Covalent
 
 ## Applications
