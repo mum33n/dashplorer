@@ -65,7 +65,7 @@ function InputHash({ toggle }) {
               value={formValue.CA}
               name="CA"
               placeholder="--Enter Contract Address--"
-              className="w-full text-white h-[40px]"
+              className="w-full text-black h-[40px]"
             ></input>
           </label>
           <label className="mr-auto mt-5 w-full">
@@ -75,7 +75,7 @@ function InputHash({ toggle }) {
               value={formValue.sender}
               name="sender"
               placeholder="--Enter Reciever's Address--"
-              className="w-full h-[40px] text-white"
+              className="w-full h-[40px] text-black"
             ></input>
           </label>
           <label className="mr-auto mt-5 w-full">
@@ -85,7 +85,7 @@ function InputHash({ toggle }) {
               value={formValue.start}
               name="start"
               placeholder="--Enter Starting Block--"
-              className="w-full h-[40px] text-white"
+              className="w-full h-[40px] text-black"
             ></input>
           </label>
           <label className="mr-auto mt-5 w-full">
@@ -95,7 +95,7 @@ function InputHash({ toggle }) {
               value={formValue.end}
               name="end"
               placeholder="--Enter Ending Block--"
-              className="w-full h-[40px] text-white"
+              className="w-full h-[40px] text-black"
             ></input>
           </label>
           <button
