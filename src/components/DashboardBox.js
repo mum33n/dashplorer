@@ -52,8 +52,8 @@ function DashboardBox() {
 
   return (
     <div className="mt-5">
-      <div className="bg-popOver h-max-[400px] text-white w-[90%] mx-auto p-3 md:p-10 shadow-lg">
-        <div className="flex mb-5">
+      <div className="bg-popOver h-max-[400px] text-white w-[90%] mx-auto md:p-10 shadow-lg">
+        <div className="flex px-5 mb-5">
           <div className="md:w-[60%] w-[40%]">Name</div>
           <div className="md:w-[20%] w-[30%]">Blockchain</div>
           <div className="md:w-[20%] w-[30%] "></div>
@@ -61,7 +61,7 @@ function DashboardBox() {
         <div>
           {dashboard.map((item, ind) => {
             return (
-              <div className="flex mt-5">
+              <div className="flex p-5 hover:bg-popOver">
                 <a
                   href={`/accounts/${item.chain}/${item.address}`}
                   className="md:w-[60%] w-[40%]"
@@ -81,7 +81,10 @@ function DashboardBox() {
             );
           })}
         </div>
-        <AiFillPlusCircle onClick={() => negateState(setInput)} />
+        <AiFillPlusCircle
+          className="text-3xl ml-5 mt-5 cursor-pointer"
+          onClick={() => negateState(setInput)}
+        />
       </div>
       {/* <div className="bg-popOver mt-10 text-white w-[90%] rounded-lg mx-auto p-10 shadow-lg">
         <div className="flex mb-5">

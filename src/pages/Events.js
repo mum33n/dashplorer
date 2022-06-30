@@ -77,7 +77,7 @@ function Events() {
       <Navbar />
       {hashQuery && <EventHashForm values={defaultForm} />}
       {contractAddress && <EventContractForm values={defaultForm} />}
-      <div className="overflow-scroll md:overflow-hidden p-5">
+      <div className="overflow-x-scroll md:overflow-hidden p-5">
         <table className="border-collapse border min-w-[700px] border-slate-400 w-full text-white">
           <thead className="bg-btnColor">
             <tr>

@@ -31,7 +31,7 @@ function AccountDashboard() {
   const { account, chain } = useParams();
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(1);
+  const [total, setTotal] = useState(0);
   useEffect(() => {
     async function getData() {
       let data = await getBalances(chain, account);
@@ -55,11 +55,11 @@ function AccountDashboard() {
           <h1>Net Worth</h1>
           <div>$ {total}</div>
         </div>
-        <div className="bg-popOver w-[95%] mt-10 p-10 text-white mx-auto">
+        <div className="bg-popOver w-[95%] mt-10 p-10 px-5 md:px-10 text-white mx-auto">
           <div className="flex justify-between">
-            <div className="text-center w-full">Portfollio</div>
+            <div className="text-center w-full">Portfolio</div>
           </div>
-          <div className="mt-10 overflow-scroll">
+          <div className="mt-10 overflow-x-scroll">
             <table className=" mb-5 min-w-[600px] border-b w-full text-white">
               <thead className="bg-btnColor">
                 <tr>
